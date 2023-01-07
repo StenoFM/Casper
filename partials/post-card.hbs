@@ -4,7 +4,11 @@ which templates loop over to generate a list of posts. --}}
 <article class="post-card {{post_class}}{{#match @custom.feed_layout "Classic"}}{{#is "home"}}{{#has index="0"}} post-card-large{{/has}}{{#has index="1,2"}} dynamic{{/has}}{{/is}}{{/match}}{{#match @custom.feed_layout "Grid"}} keep-ratio{{/match}}{{#match @custom.feed_layout "List"}}{{#is "home, paged"}} post-card-large{{/is}}{{/match}}{{#unless access}} post-access-{{visibility}}{{/unless}}">
 
     {{#if feature_image}}
+    {{#has tag="What We’re Reading"}}
+    <a class="post-card-image-link" href="{{canonical_url}}">
+    {{else}}
     <a class="post-card-image-link" href="{{url}}">
+    {{/has}}
 
         {{!-- This is a responsive image, it loads different sizes depending on device
         https://medium.freecodecamp.org/a-guide-to-responsive-images-with-ready-to-use-templates-c400bd65c433 --}}
@@ -37,7 +41,11 @@ which templates loop over to generate a list of posts. --}}
 
     <div class="post-card-content">
 
+        {{#has tag="What We’re Reading"}}
+        <a class="post-card-content-link" href="{{canonical_url}}">
+        {{else}}
         <a class="post-card-content-link" href="{{url}}">
+        {{/has}}
             <header class="post-card-header">
                 <div class="post-card-tags">
                     {{#primary_tag}}
@@ -63,6 +71,7 @@ which templates loop over to generate a list of posts. --}}
             {{/if}}
         </a>
 
+        {{^has tag="What We’re Reading"}}
         <footer class="post-card-meta">
             <time class="post-card-meta-date" datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time>
             {{#if reading_time}}
@@ -72,6 +81,7 @@ which templates loop over to generate a list of posts. --}}
                 {{comment_count}}
             {{/if}}
         </footer>
+        {{/has}}
 
     </div>
 

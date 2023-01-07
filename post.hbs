@@ -23,12 +23,17 @@ into the {body} tag of the default.hbs template --}}
             {{/if}}
         </div>
 
+        {{#has tag="What We’re Reading"}}
+        <a href="{{canonical_url}}"><h1 class="article-title">🔁 {{title}}</h1></a>
+        {{else}}
         <h1 class="article-title">{{title}}</h1>
+        {{/has}}
 
         {{#if custom_excerpt}}
             <p class="article-excerpt">{{custom_excerpt}}</p>
         {{/if}}
 
+        {{^has tag="What We’re Reading"}}
         <div class="article-byline">
         <section class="article-byline-content">
 
@@ -58,6 +63,7 @@ into the {body} tag of the default.hbs template --}}
 
         </section>
         </div>
+        {{/has}}
 
         {{#match @custom.post_image_style "!=" "Hidden"}}
         {{#if feature_image}}
